@@ -2,3 +2,19 @@
   padding:0;
   margin:0;
 }
+a{
+  color:inherit;
+  text-decoration: none;
+}
+.btnContainer{
+  width:500px;
+  height:500px;
+  margin:0 auto;
+  border:1px solid #ccc;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.btnContainer>button{
+  padding:1rem;
+}
