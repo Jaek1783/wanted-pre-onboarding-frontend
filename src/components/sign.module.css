@@ -1,0 +1,24 @@
+.container{
+    border:1px solid #000;
+    position: absolute;
+    top:50%;
+    left:50%;
+    transform: translate(-50%,-50%);
+    padding:1rem;
+}
+.container>form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.container>form>label{
+    padding:.5rem;
+}
+.container>form>label>span{
+    display: inline-block;
+    width:50px;
+}
+.container>form>button{
+    height: 50px;
+
+}

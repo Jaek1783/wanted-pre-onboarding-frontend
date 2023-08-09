@@ -1,9 +1,17 @@
 import { useEffect,useState } from "react";
 import Todo from "./todo-item";
 import axios from "axios";
+import styles from './todo.module.css';
+import { useNavigate } from "react-router-dom";
 const TodoList = ({todoRef,addList, list, setList, listRef})=>{
+    const navigate = useNavigate();
     const [update, setUpdate] = useState(false);
     const [editingIndex, setEditingIndex] = useState(-1);
+
+    const logoutHandler = ()=>{
+        window.localStorage.removeItem('jwt');
+        navigate('/');
+    };
 useEffect(()=>{
     const fetchData = async () => {
         try {
@@ -51,8 +59,8 @@ const handleDeleteClick = async (item) => {
       console.error('객체 삭제 실패:', error);
     }
   };
-    return <div>
-        <form action="">
+    return <div className={styles.container}>
+        <form>
             <input data-testid="new-todo-input" ref={todoRef}/>
             <button data-testid="new-todo-add-button" onClick={addList}>추가</button>
         </form>
@@ -69,6 +77,7 @@ const handleDeleteClick = async (item) => {
                                             handleDeleteClick={handleDeleteClick}
                                             />)}
         </ul>
+        <button className={styles.logout} onClick={logoutHandler}>로그아웃</button>
     </div>;
 };
 export default TodoList;

@@ -42,8 +42,8 @@ function App() {
       const password = passwordRef.current.value.trim();
       const data = {email:email, password:password};
       const headers = {'Content-Type':'application/json'};
-     const response = await axios.post(`${server_url}/auth/signup`, data, {headers});
-    // const response = await axios.get('http://localhost:8000/auth/signup');
+      const response = await axios.post(`${server_url}/auth/signup`, data, {headers});
+      console.log(response.data)
      if(response.status === 201){
       alert('축하합니다. 회원가입이 완료되었습니다');
       emailRef.current.value='';
