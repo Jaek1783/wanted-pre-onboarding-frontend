@@ -4,10 +4,13 @@ import SignUpPage from './components/sign-up';
 import SignInPage from './components/sign-in';
 import HomePage from './components/home';
 import { useRef,useState} from 'react';
+import axios from 'axios';
+import {useNavigate} from 'react-router-dom';
 function App() {
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
   const btnRef = useRef(null);
+  const navigate = useNavigate();
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   
   const checkForm = ()=>{
@@ -25,11 +28,23 @@ function App() {
           setIsButtonDisabled(true)
         }
       }
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-      const emailValue = emailRef.current.value.trim();
-      const passwordValue = passwordRef.current.value.trim();
-      console.log(emailValue, passwordValue)
+    
+      const email = emailRef.current.value.trim();
+      const password = passwordRef.current.value.trim();
+      console.log(email, password)
+      const data = {email:email, password:password};
+      const headers = {'Content-Type':'application/json'};
+     const response = await axios.post("http://localhost:8000/auth/signup", data, {headers});
+    // const response = await axios.get('http://localhost:8000/auth/signup');
+     console.log(response.data)
+     if(response.status === 201){
+      alert('축하합니다. 회원가입이 완료되었습니다');
+      emailRef.current.value='';
+      passwordRef.current.value='';
+      navigate('/signin')
+     }
     }
   return (
     <div className="App">
