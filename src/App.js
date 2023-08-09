@@ -9,6 +9,8 @@ import {useNavigate} from 'react-router-dom';
 function App() {
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
+  const idRef = useRef(null);
+  const pwRef = useRef(null);
   const btnRef = useRef(null);
   const navigate = useNavigate();
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
@@ -30,10 +32,8 @@ function App() {
       }
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
       const email = emailRef.current.value.trim();
       const password = passwordRef.current.value.trim();
-      console.log(email, password)
       const data = {email:email, password:password};
       const headers = {'Content-Type':'application/json'};
      const response = await axios.post("http://localhost:8000/auth/signup", data, {headers});
@@ -46,6 +46,20 @@ function App() {
       navigate('/signin')
      }
     }
+
+  const handleSignin = async (e)=>{
+    e.preventDefault();
+    const id = idRef.current.value;
+    const pw = pwRef.current.value;
+    const data = {email:id, password:pw};
+    const headers = {'Content-type': 'application/json'}
+    const response = await axios.post('http://localhost:8000/auth/signin',data,{headers});
+    if(response.data.access_token){
+      window.localStorage.setItem('jwt',response.data.access_token)
+      navigate('/')
+     }
+
+  }
   return (
     <div className="App">
       <Routes>
@@ -58,7 +72,11 @@ function App() {
                                           isButtonDisubled={isButtonDisabled}
                                           handleSubmit={handleSubmit}
                                           />} />
-        <Route path="/signin" element={<SignInPage />} />
+        <Route path="/signin" element={<SignInPage 
+                                          idRef={idRef}
+                                          pwRef={pwRef}
+                                          handleSignin={handleSignin}
+                                          />} />
       </Routes>
     </div>
   );
