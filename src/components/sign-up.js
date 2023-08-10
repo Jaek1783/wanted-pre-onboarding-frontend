@@ -5,7 +5,7 @@ const SignUpPage = ({emailRef, passwordRef, btnRef, checkForm, isButtonDisubled,
         <h1>회원가입</h1>
             <form>
                 <label>
-                    <span>ID</span>
+                    <span>Email</span>
                     <input type="email" onChange={checkForm} data-testid="email-input" ref={emailRef} required placeholder="@를 꼭 붙여주세요"/>
                 </label>
                 <label>

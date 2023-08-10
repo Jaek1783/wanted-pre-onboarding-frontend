@@ -5,7 +5,7 @@ const SignInPage = ({idRef, pwRef, handleSignin})=>{
         <h1>로그인</h1>
         <form>
                 <label>
-                    <span>ID</span>
+                    <span>Email</span>
                     <input type="email"  data-testid="email-input" ref={idRef}/>
                 </label>
                 <label>
